@@ -4,8 +4,8 @@ import com.Solera.APIRest.APIwithTDD.Models.WorkshopClass;
 import java.util.List;
 
 public interface IServiceWorkshop {
-    Boolean save(WorkshopClass entity);
-    Boolean deleteById(Long id);
-    WorkshopClass findById(Long id);
-    List<WorkshopClass> findAll();
+    List<WorkshopClass> getAllWorkshops();
+    WorkshopClass getWorkshopById(int id);
+    WorkshopClass createWorkshop(WorkshopClass workshop);
+    boolean deleteWorkshop(int id);
 }

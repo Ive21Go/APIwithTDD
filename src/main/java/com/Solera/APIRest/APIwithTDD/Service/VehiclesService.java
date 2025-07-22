@@ -14,31 +14,32 @@ public class VehiclesService implements IServiceVehicles {
 
 
     @Override
-    public Boolean save(VehiclesClass vehicle) {
-        if (vehiclesRepository.save(vehicle).getModel() != null)
-            return true;
-        return false;
+    public List<VehiclesClass> getAllVehicles() {
+        List<VehiclesClass> vehicles = (List<VehiclesClass>) vehiclesRepository.findAll();
+        return vehicles;
     }
 
     @Override
-    public Boolean deleteById(Long id) {
-        vehiclesRepository.deleteById(id);
-        return true;
-    }
-
-    @Override
-    public VehiclesClass findById(Long id) {
-        if(vehiclesRepository.findById(id)
-                .isPresent()) {
-            return vehiclesRepository.findById(id).get();
+    public VehiclesClass getVehicleById(int id) {
+        if(vehiclesRepository.findById((long) id).isPresent()) {
+            return vehiclesRepository.findById((long) id).get();
         }
         return null;
     }
 
     @Override
-    public List<VehiclesClass> findAll() {
-        List<VehiclesClass> vehicles = (List<VehiclesClass>) vehiclesRepository.findAll();
-        return vehicles;
+    public VehiclesClass createVehicle(VehiclesClass vehicle) {
+        return vehiclesRepository.save(vehicle);
+    }
+
+    @Override
+    public boolean deleteVehicle(int id) {
+        try {
+            vehiclesRepository.deleteById((long) id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

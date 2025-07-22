@@ -21,9 +21,4 @@ public class PartsClass {
     @ManyToOne
     @JoinColumn (name = "vehicle_id")
     private VehiclesClass vehicle;
-
-    public String getName(){
-
-        return this.name;
-    }
 }

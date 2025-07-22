@@ -14,30 +14,31 @@ public class WorkshopService implements IServiceWorkshop {
 
 
     @Override
-    public Boolean save(WorkshopClass workshop) {
-        if (workshopRepository.save(workshop).getName() != null)
-            return true;
-        return false;
+    public List<WorkshopClass> getAllWorkshops() {
+        List<WorkshopClass> workshops = (List<WorkshopClass>) workshopRepository.findAll();
+        return workshops;
     }
 
     @Override
-    public Boolean deleteById(Long id) {
-        workshopRepository.deleteById(id);
-        return true;
-    }
-
-    @Override
-    public WorkshopClass findById(Long id) {
-        if(workshopRepository.findById(id)
-                .isPresent()) {
-            return workshopRepository.findById(id).get();
+    public WorkshopClass getWorkshopById(int id) {
+        if(workshopRepository.findById((long) id).isPresent()) {
+            return workshopRepository.findById((long) id).get();
         }
         return null;
     }
 
     @Override
-    public List<WorkshopClass> findAll() {
-        List<WorkshopClass> workshops = (List<WorkshopClass>) workshopRepository.findAll();
-        return workshops;
+    public WorkshopClass createWorkshop(WorkshopClass workshop) {
+        return workshopRepository.save(workshop);
+    }
+
+    @Override
+    public boolean deleteWorkshop(int id) {
+        try {
+            workshopRepository.deleteById((long) id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

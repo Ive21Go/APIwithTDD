@@ -5,8 +5,8 @@ import com.Solera.APIRest.APIwithTDD.Models.PartsClass;
 import java.util.List;
 
 public interface IServiceParts {
-        Boolean save(PartsClass entity);
-        Boolean deleteById(Long id);
-        PartsClass findById(Long id);
-        List<PartsClass> findAll();
+    List<PartsClass> getAllParts();
+    PartsClass getPartById(int id);
+    PartsClass createPart(PartsClass part);
+    boolean deletePart(int id);
 }

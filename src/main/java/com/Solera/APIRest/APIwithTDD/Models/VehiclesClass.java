@@ -18,22 +18,21 @@ public class VehiclesClass {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Model;
-    private String Brand;
-    private String VehicleYear;
-    private String Color;
-    private String Vin;
+    private String model;
+    private String brand;
+    private String vehicleYear;
+    private String color;
+    private String vin;
 
     @ManyToOne
-    @JoinColumn (name = "Workshop_id" )
-    private WorkshopClass Workshop;
+    @JoinColumn (name = "workshop_id" )
+    private WorkshopClass workshop;
 
     @OneToMany (mappedBy = "vehicle")
     private List <PartsClass> parts;
 
     public String getModel(){
-
-        return this.Model;
+        return this.model;
     }
 
 }

@@ -22,7 +22,7 @@ public class WorkshopClass {
     private String description;
 
     @OneToMany (mappedBy = "workshop")
-    private List <VehiclesClass> Vehicle;
+    private List <VehiclesClass> vehicles;
 
     public String getName(){
 

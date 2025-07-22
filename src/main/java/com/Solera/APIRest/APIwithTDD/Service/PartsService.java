@@ -12,32 +12,34 @@ public class PartsService implements IServiceParts {
 
 
     @Override
-    public Boolean save(PartsClass parts) {
-        if (partsRepository.save(parts).getName() != null)
-            return true;
-        return false;
+    public List<PartsClass> getAllParts() {
+        List<PartsClass> parts = (List<PartsClass>) partsRepository.findAll();
+        return parts;
     }
 
     @Override
-    public Boolean deleteById(Long id) {
-       partsRepository.deleteById(id);
-        return true;
-    }
-
-    @Override
-    public PartsClass findById(Long id) {
-        if(partsRepository.findById(id)
-                .isPresent()) {
-            return partsRepository.findById(id).get();
+    public PartsClass getPartById(int id) {
+        if(partsRepository.findById((long) id).isPresent()) {
+            return partsRepository.findById((long) id).get();
         }
         return null;
     }
 
     @Override
-    public List<PartsClass> findAll() {
-        List<PartsClass> parts = (List<PartsClass>) partsRepository.findAll();
-        return parts;
+    public PartsClass createPart(PartsClass part) {
+        return partsRepository.save(part);
     }
+
+    @Override
+    public boolean deletePart(int id) {
+        try {
+            partsRepository.deleteById((long) id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
 
 }
