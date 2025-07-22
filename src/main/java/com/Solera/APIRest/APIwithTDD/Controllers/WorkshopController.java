@@ -2,46 +2,49 @@ package com.Solera.APIRest.APIwithTDD.Controllers;
 
 import com.Solera.APIRest.APIwithTDD.Models.WorkshopClass;
 import com.Solera.APIRest.APIwithTDD.Repository.WorkshopRepository;
-import com.Solera.APIRest.APIwithTDD.Service.PartsService;
-import com.Solera.APIRest.APIwithTDD.Service.WorkshopService;
-import models.PartsClass;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping ("/API/v1")
+@RequestMapping ("/API/workshop")
 
 public class WorkshopController {
 
-    //private WorkshopRepository workshopRepository;
-    private WorkshopRepository workshopRepository;
-    public void First (WorkshopRepository crudMethods){workshopRepository = crudMethods};
+    private final WorkshopRepository workshopRepository;
 
-// CRUD methods (Create, Read, Update, Delete)
-@GetMapping("/Workshop/{id}")
-public String getProductById (@PathVariable Long id) {
-    WorkshopClass workshopService = workshopRepository.findById(id);
-    // Check if the product exists
-    if(workshopService == null) {
-        return "Workshop with ID " + id + " not found.";
+    public WorkshopController(WorkshopRepository crudMethods) {
+        this.workshopRepository = crudMethods;
     }
-    return "Workshop found: " + workshopService.toString();
-}
-@PostMapping("/workshop/all")
-    public ResponseEntity<String> postMappingWorkshop (@RequestBody WorkshopRepository workshopRepository) {
-        //Return "The product name is " + product.Name;
-        WorkshopRepository.save(workshopRepository);
-        return new ResponseEntity<String>("The workshop correspond: Vehicle" +
-                "and needed Parts:" + PartsClass.getId() + PartsClass.getName() + PartsClass.getDescription() + );
+
+    // CRUD methods (Create, Read, Update, Delete)
+    @GetMapping("/workshop/{id}")
+    public ResponseEntity<WorkshopClass> getWorkshopById(@PathVariable Long id) {
+        Optional<WorkshopClass> workshop = workshopRepository.findById(id);
+        if (workshop.isPresent()) {
+            return ResponseEntity.ok(workshop.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/workshop")
+    public ResponseEntity<Iterable<WorkshopClass>> getAllWorkshops() {
+        Iterable<WorkshopClass> workshops = workshopRepository.findAll();
+        return ResponseEntity.ok(workshops);
+    }
+
+    @PostMapping("/workshop")
+    public ResponseEntity<WorkshopClass> createWorkshop(@RequestBody WorkshopClass workshop) {
+        WorkshopClass savedWorkshop = workshopRepository.save(workshop);
+        return ResponseEntity.ok(savedWorkshop);
     }
 
     @DeleteMapping("/workshop/{id}")
-    public String deleteWorkshop(@PathVariable Long id) {
+    public String deleteWorkshopById (@PathVariable Long id) {
         workshopRepository.deleteById(id);
         return "Workshop with ID " + id + " has been deleted successfully";
     }
-
 
 }

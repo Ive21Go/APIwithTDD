@@ -18,8 +18,8 @@ public class WorkshopClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
+    private String Name;
+    private String Description;
 
     @OneToMany (mappedBy = "workshop")
     private List <VehiclesClass> Vehicle;
@@ -29,4 +29,14 @@ public class WorkshopClass {
         return this.name;
     }
 
+    //private models.WorkshopClass workshopClass;
+    public Long getId (){
+        return this.id;
+    }
+    public String getName() {
+        return this.Name;
+    }
+    public String getDescription() {
+        return this.Description;
+    }
 }

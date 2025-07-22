@@ -17,7 +17,6 @@ public class VehiclesClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String Model;
     private String Brand;
     private String VehicleYear;
@@ -34,6 +33,26 @@ public class VehiclesClass {
     public String getModel(){
 
         return this.Model;
+    }
+
+    //private models.VehiclesClass VehiclesClass;
+    public Long getId(){
+        return this.id;
+    }
+    public String getModel() {
+        return this.Model;
+    }
+    public String getBrand() {
+        return this.Brand;
+    }
+    public String getYear() {
+        return this.VehicleYear;
+    }
+    public String getColor() {
+        return this.Color;
+    }
+    public String getVin() {
+        return this.Vin;
     }
 
 }
