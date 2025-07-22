@@ -11,19 +11,26 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class PartsClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
+    private String Name;
+    private String Description;
 
     @ManyToOne
     @JoinColumn (name = "vehicle_id")
     private VehiclesClass vehicle;
 
-    public String getName(){
-
-        return this.name;
+    //private models.PartsClass PartClass;
+    public Long getId (){
+        return this.id;
+    }
+    public String getName() {
+        return this.Name;
+    }
+    public String getDescription() {
+        return this.Description;
     }
 }
