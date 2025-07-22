@@ -24,4 +24,9 @@ public class WorkshopClass {
     @OneToMany (mappedBy = "workshop")
     private List <VehiclesClass> Vehicle;
 
+    public String getName(){
+
+        return this.name;
+    }
+
 }

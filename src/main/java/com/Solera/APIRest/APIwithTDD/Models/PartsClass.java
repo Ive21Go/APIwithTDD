@@ -19,6 +19,11 @@ public class PartsClass {
     private String description;
 
     @ManyToOne
-    @JoinTable (name = "vehicle_id")
+    @JoinColumn (name = "vehicle_id")
     private VehiclesClass vehicle;
+
+    public String getName(){
+
+        return this.name;
+    }
 }

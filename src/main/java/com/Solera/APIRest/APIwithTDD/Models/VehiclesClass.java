@@ -25,11 +25,15 @@ public class VehiclesClass {
     private String Vin;
 
     @ManyToOne
-    @JoinTable (name = "Workshop_id" )
+    @JoinColumn (name = "Workshop_id" )
     private WorkshopClass Workshop;
 
     @OneToMany (mappedBy = "vehicle")
     private List <PartsClass> parts;
 
+    public String getModel(){
+
+        return this.Model;
+    }
 
 }
